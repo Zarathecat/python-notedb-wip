@@ -36,14 +36,18 @@ class Change(object):
 
     
 
-    def is_new():
-        pass
-    def is_abandoned():
-        pass
-    def is_draft():
-        pass
+    def is_new(self):
+        self.status = statuses[NEW]
+        return self.status
+    def is_abandoned(self):
+        self.status = statuses[ABANDONED]
+        return self.status
+    def is_draft(self):
+        self.status = statuses[DRAFT]
+        return self.status
     def is_merged():
-        pass
+        self.status = statuses[MERGED]
+        return self.status
 
 # the original script returns 1 if nothing else returns so that an error
 # is returned; should have an equivalent.

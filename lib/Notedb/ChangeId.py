@@ -10,6 +10,4 @@ class ChangeId(object):
         self.is_uuid = 'ro'
 
     def get(self):
-        # I think the original code returns the first index of the
-        # the 'id'.
-        return self.id[0]
+        return self.id

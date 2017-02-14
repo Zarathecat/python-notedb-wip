@@ -14,7 +14,7 @@ class BlobBuilder(object):
     def __init__(self):
         self.repo = repository.BaseRepository()
 
-    def create():
-        ONEPARAMETER = (thing, otherthing) #don't know what this is yet
-        tree_or_blob = repo.whatever_to_tree_or_blob(ONEPARAMETER)
+    def create(self, buffer): #are $self, buffer in original, so just copying
+        thing_to_create = (self, buffer) #next thing takes 1 param
+        tree_or_blob = self.repo.whatever_to_tree_or_blob(thing_to_create)
         return tree_or_blob

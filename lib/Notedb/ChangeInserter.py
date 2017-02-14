@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # GPL v2 (see COPYING)
 # based on https://git.gitano.org.uk/personal/richardipsum/perl-notedb.git/tree/lib/Notedb/ChangeInserter.pm
+# import ChangeId, ChangeList, Signature # these should really come from the
+#                                        # shared notedb package instead
 # this is mainly pass statements since the code is pretty dense
 
 class ChangeInserter(object):
@@ -12,25 +14,51 @@ class ChangeInserter(object):
         
         self.next_id = 'ro'
 
-    def build(self):
-        # not sure if we just want the first thing in the id or if
-        # removing the element from it is also important.
-        # the perl uses `shift` here
-        selected_id_type = id_type.pop(0)
-        if selected_id_type == 'UUID':
-            next_id.pop(0) = make_uuid_change_id #undefined
-            return #yeah no idea what's going on here yet.
+    def build(self, new_object):
+        # new_object is supposed to be equivalent to $self = shift in the
+        # original. I'm not very confident I've understood this.
+        # not sure where the new_object is passed yet
+        new_id_type = new_object.id_type
+        if new_id_type == 'UUID':
+            new_object.next_id = make_uuid_change_id #defined below... one day.
+            return new_object.next_id
         elif selected_type == 'callback':
-            next_id.pop(0) = THERE IS AN ANON FUNCTION IDK
-            return
+            next_change = ChangeId()
+            new_id = # something with id_generator...
+            next_change.id = # will be the new id...
+            next_change.is_uuid = '1'
+            return new_object.next_id
 
-        _next_id.pop(0) = ANOTHER ANON FUNCTION
+        new_object.next_id = next_integer_change_id(new_object)
 
-    def next_integer_change_id:
-        pass
+    def next_integer_change_id(self, new_object):
+        changelist = ChangeList()
+        changelist.repo = new_object.metadata_repo.path
+        num_of_changes = changelist.repo.changes # really not sure I get this
 
-    def make_uuid_change_id:
-        pass
+
+    def make_uuid_change_id(self, new_object):
+        head = new_object.content_repo.head.target #maybe this should be like
+                          # new_object.content_repo[head][target] ...
+        tree = head.tree.id #etc
+        author = Signature()
+        author.signature = head.author
+        committer = Signature()
+        commit.signature = head.committer
+        parents = head.parents #each parent, joined on a newline? idk
+                               #how perl's map works yet so not sure here
+        obj = 'EOF' # yeah, really don't know about this. I think this is
+                    # inserted at end so that this can be used to write
+                    # to a file as-is, so we'd do it a bit differently
+                    # in python anyway. maybe this is meant to be the
+                    # null byte for the end of the header?
+
+        new_change_id = ChangeId()
+        new_change_id.id = utils.hash_object(obj) # utils is a class from
+                                                  # our package. This
+                                                  # line does not look ok
+                                                  # to me at all...
+        
 
     def insert:
         pass
