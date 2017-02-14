@@ -14,32 +14,31 @@ class ChangeInserter(object):
         
         self.next_id = 'ro'
 
-    def build(self, new_object):
-        # new_object is supposed to be equivalent to $self = shift in the
-        # original. I'm not very confident I've understood this.
-        # not sure where the new_object is passed yet
-        new_id_type = new_object.id_type
+    def build(self):
+        # TURNS OUT I HAD THIS TOTALLY BACKWARDS; $self = shift
+        # refers to the current object...
+        new_id_type = self.id_type
         if new_id_type == 'UUID':
-            new_object.next_id = make_uuid_change_id #defined below... one day.
-            return new_object.next_id
+            self.next_id = make_uuid_change_id #defined below... one day.
+            return self.next_id
         elif selected_type == 'callback':
             next_change = ChangeId()
             new_id = # something with id_generator...
             next_change.id = # will be the new id...
             next_change.is_uuid = '1'
-            return new_object.next_id
+            return self.next_id
 
-        new_object.next_id = next_integer_change_id(new_object)
+        self.next_id = next_integer_change_id(self)
 
-    def next_integer_change_id(self, new_object):
+    def next_integer_change_id(self):
         changelist = ChangeList()
-        changelist.repo = new_object.metadata_repo.path
+        changelist.repo = self.metadata_repo.path
         num_of_changes = changelist.repo.changes # really not sure I get this
 
 
-    def make_uuid_change_id(self, new_object):
-        head = new_object.content_repo.head.target #maybe this should be like
-                          # new_object.content_repo[head][target] ...
+    def make_uuid_change_id(self):
+        head = self.content_repo.head.target #maybe this should be like
+                          # self.content_repo[head][target] ...
         tree = head.tree.id #etc
         author = Signature()
         author.signature = head.author
