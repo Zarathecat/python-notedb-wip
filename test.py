@@ -46,7 +46,7 @@ for change_id in change_ids:
         value = comment_map.get_comment_list()
         # here there is an 'n' set equal to @v. but v is array and n is scalar.
         # wondering if that's a quick way to get the length or something
-        i = 0 # Don't know what this is yet
+        i = 0 #just a counter
         while i < v:                        # i < n in the original
             print "name=%d c%d" % (sha, i) + str(v[i]) #may not work
             i += 1
@@ -85,7 +85,7 @@ for change_id in change_ids:
     misc_author.author_name = 'Test user'
     misc_author.author_email = 'test@test'
     # I think 'cu' is 'user in change', so this says 'change user' but doesn't
-    # change the user...
+    # change the user... will get confused by that later and should reword
     change_user = change_notes.get_new_change_update(misc_author)
     change_user.load()
 
