@@ -7,7 +7,7 @@ import pygit2
 
 # I think this acts as a decorator on the Metadata class
 class ChangeInserter(object):
-    def __init__(self):
+    def __init__(self, content_repo, id_type, id_generator, refprefix, next_id):
         self.content_repo = 'ro'
         self.id_type = 'ro'
         self.id_generator = 'ro'
@@ -16,7 +16,7 @@ class ChangeInserter(object):
         self.next_id = 'ro'
 
     def build(self):
-        # TURNS OUT I HAD THIS TOTALLY BACKWARDS; $self = shift
+        # $self = shift
         # refers to the current object...
         new_id_type = self.id_type
         if new_id_type == 'UUID':
