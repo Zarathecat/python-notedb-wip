@@ -62,7 +62,7 @@ class ChangeInserter(object):
                                                   # to me at all...
         
 
-    def insert(self, subject, commit_subject, destination_branch,
+    def insert(self, subject, commit_subject, destination_branch, topic
                author, revid):
         # I think the first 'validate'
         # line here checks we have been passed the right
@@ -96,16 +96,22 @@ class ChangeInserter(object):
 
         update = change_notes.get_new_change_update(author)#should make a class
 
-        update.status = Change.statuses[NEW]
+        # original uses -> , but I think these should be attributes of the
+        # class for a python version, so these are listed accordingly
+
+        new_status = Change.statuses[NEW]
+        update.status = new_status
         update.subject = subject
         update.commit_subject = commit_subject
         update.destination_branch = destination_branch
         update.topic = topic
         update.author = author
-        update.set_commit = revid #changenotes calls changeupdate
-                                  # which has set_commit, etc
-        update.patchset_id = 1 # this is patchset_id(1) so should check that's
-                               # actually saying it's equal to 1
-        update.commit # I don't know why this is on its own in the original
-                      # am keeping it here so I remember to check that
+        update.set_commit = revid
+        update.patchset_id = 1
+        update = update.commit() # This step can possibly be skipped in python.
+                                 # it says 'run `save()` on the first argument
+                                 # passed (the update object itself). the `save`
+                                 # function is found in the Metadata package,
+                                 # which ChangeUpdate extends. so we should
+                                 # maybe call that directly
         return update
