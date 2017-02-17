@@ -8,14 +8,14 @@
 # gets a refname from some specified ref_prefix and change_id,
 # and finds the change id for a specified ref(name?)
 
-FOOTER_BRANCH = 'Branch'
-FOOTER_COMMIT = 'Commit'
-FOOTER_PATCH_SET = 'Patch-set'
-FOOTER_STATUS = 'Status'
-FOOTER_SUBJECT= 'Subject'
-FOOTER_TOPIC = 'Topic'
-FOOTER_LABEL = 'Label'
-FOOTER_REMOVED = 'Removed'
+FOOTER = {'Branch': '',
+          'Commit': '',
+          'Patch-set':'',
+          'Status':'',
+          'Subject':'',
+          'Topic':'',
+          'Label':'',
+          'Removed':''}
 # original says this is not a complete set of footers. so repeating that here
 # so it doesn't get forgotten.
 
