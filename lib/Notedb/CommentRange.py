@@ -3,8 +3,10 @@
 # based on https://git.gitano.org.uk/personal/richardipsum/perl-notedb.git/tree/lib/Notedb/CommentRange.pm
 
 # This contains a tostr() function and some overloads. I suspect it should look
-# very different in a python implementation. I believe it's used to establish
-# which lines an inline comment should range over. So we have a startline, an
+# very different in a python implementation. I'm not sure if it's used to see
+# what lines in a note are for a specific comment, or if it's used to see what
+# lines in a patch a comment ranges over for inline comments.
+# Anyway, if nothing else, I'm fairly confident we have a startline, an
 # endline, a startchar and an endchar.
 
 class CommentRange(object):
