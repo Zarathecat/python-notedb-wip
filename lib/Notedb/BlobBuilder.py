@@ -15,6 +15,10 @@ import repository from pygit2
 
 class BlobBuilder(object):
     def __init__(self):
+        # the below shouldn't be a dict; these refer to getter/setters, ie:
+        # ro means it has a getter but not a setter. still not sure what
+        # 'required' would look like yet. @property is suggested to do a
+        # similar thing in python. 
         self.repo = {'mode': 'ro',
                      'required':1}
 
