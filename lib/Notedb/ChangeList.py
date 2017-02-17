@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 # GPL v2
 
+# This is used to get the numof_changes in ChangeInserter, for the
+# next_integer_change_id function
+
 class ChangeList(object):
     def __init__(self):
         self.repo = 'ro'

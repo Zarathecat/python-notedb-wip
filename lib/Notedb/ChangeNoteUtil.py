@@ -4,6 +4,10 @@
 
 # based on https://git.gitano.org.uk/personal/richardipsum/perl-notedb.git/tree/lib/Notedb/ChangeNoteUtil.pm
 
+# This defines some footers that are stored at the end of the commit message,
+# gets a refname from some specified ref_prefix and change_id,
+# and finds the change id for a specified ref(name?)
+
 FOOTER_BRANCH = 'Branch'
 FOOTER_COMMIT = 'Commit'
 FOOTER_PATCH_SET = 'Patch-set'

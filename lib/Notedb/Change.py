@@ -4,6 +4,9 @@
 
 # based on https://git.gitano.org.uk/personal/richardipsum/perl-notedb.git/tree/lib/Notedb/Change.pm
 
+# This lists some constants for change statuses, along with other metadata
+# that all changes should have, and functions to change change statuses.
+
 class Change(object):
     statuses = { 
                       NEW = 'new',

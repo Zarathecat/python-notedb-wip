@@ -1,19 +1,24 @@
 #!/usr/bin/env python
 # GPL v2 (see COPYING)
 # based on https://git.gitano.org.uk/personal/richardipsum/perl-notedb.git/tree/lib/Notedb/ChangeInserter.pm
+
+# This patch makes a Change! it gives the change an id and a uuid.
+
 # import ChangeId, ChangeList, Signature # these should really come from the
 #                                        # shared notedb package instead
 import pygit2
 
+#this also imports 'validate' in the original to check types
+
 # I think this acts as a decorator on the Metadata class
 class ChangeInserter(object):
     def __init__(self, content_repo, id_type, id_generator, refprefix, next_id):
-        self.content_repo = 'ro'
-        self.id_type = 'ro'
-        self.id_generator = 'ro'
-        self.refprefix = 'ro'
+        self.content_repo = {'mode':'ro', 'required':1} #and has string attrs?
+        self.id_type = {'mode':'ro'} #and has string attributes?
+        self.id_generator = {'mode':'ro'} #and has coderef attributes?
+        self.refprefix = {'mode':'ro'} #has string attributes
         
-        self.next_id = 'ro'
+        self.next_id = {'mode'@'ro'}
 
     def build(self):
         # $self = shift
@@ -23,14 +28,20 @@ class ChangeInserter(object):
             self.next_id = make_uuid_change_id #defined below... one day.
             return self.next_id
         elif selected_type == 'callback':
-            next_change = ChangeId()
-            new_id = # something with id_generator...
-            next_change.id = # will be the new id...
-            next_change.is_uuid = '1'
-            return self.next_id
+            next_change_id = ChangeId()
+            # I think as id_generator is a coderef in the original, which means
+            # it acts as a function here or something to create an id, not sure
+            # I *think* this makes the thing a uuid, then the first if clause
+            # will be called to do make_uuid_change_id on it.
+            new_id = self.id_generator(self.content_repo.head)
+            next_change_id.id = new_id
+            next_change_id.is_uuid = '1'
+            return self.next_change_id
 
         self.next_id = next_integer_change_id(self)
 
+    # In the original, it says that integer-based change ids are deprecated.
+    # I don't know why yet, or where these fit in yet.
     def next_integer_change_id(self):
         changelist = ChangeList()
         changelist.repo = self.metadata_repo.path #this obj doesn't have a 
@@ -38,7 +49,10 @@ class ChangeInserter(object):
                                                   # it from class it decorates.
         num_of_changes = changelist.repo.changes # really not sure I get this
 
-
+    # this is the bit that actually makes the change_id
+    # it hashes an object from a partial commit sha, which it gets from 
+    # HEAD. The hash is returned as
+    # the id of the change.
     def make_uuid_change_id(self):
         head = self.content_repo.head.target #maybe this should be like
                           # self.content_repo[head][target] ...
