@@ -38,6 +38,6 @@ cannot use GPLv2-licensed components.
 
 # Resources
 
-Richard Ipsum's notedb spec is available here:
+Richard Ipsum's documentation of the notedb spec is available here:
 
 https://git.gitano.org.uk/personal/richardipsum/perl-notedb.git/tree/notedb.md?h=ripsum/spec&id=79408425ec9d443a83e3290d4295278f0a0b3198
