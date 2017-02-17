@@ -13,12 +13,17 @@ https://git.gitano.org.uk/personal/richardipsum/perl-notedb.git/tree/?h=ripsum/s
 
 # Why
 
-The goal is to make an API that can be used for code review, that allows teams
-to keep the details of review in the same place as the code. This would mean
-that code review could be decoupled from existing development suites, allowing
-people to create custom UIs, clients, etc if wanted, and plug into other tools.
-By using NoteDB specifically, we get multiple benefits, eg: review metadata is
+The goal is to make an API that can be used for code review, for cases when
+ teams wish to keep the details of review in the same place as the code.
+By providing an API for NoteDB specifically, we get multiple benefits,
+eg: review metadata is
 preserved if the code is moved and offline code review is possible.
+
+
+The API itself will provide a
+pluggable interface for interacting with review metadata, allowing people to
+more easily extend the ecosystem around code review with custom components,
+and communicate with existing review systems.
 
 
 There is an existing implementation for both a NoteDB parser and a commandline
